@@ -1,0 +1,13 @@
+body {
+    /* background-color: #e3f9e2;
+    color: #488b44; */
+    background-color: rgb(223, 202, 178);
+    color: rgb(67, 53, 22);
+    font-family: Arial;
+    line-height: 1.5;
+}
+
+img {
+    width: auto;
+    height: 200px;
+}
