@@ -218,8 +218,14 @@ def raccoon():
 
 @app.route('/lab2/example')
 def example():
-    name = 'Полина Топорнина'
-    num_of_lab = 'Лабораторная работа 2'
-    group = 'ФБИ-12'
-    num_of_course = '3 курс'
-    return render_template('example.html')
+    name, num_of_lab, group, num_of_course = 'Полина Топорнина', 2, 'ФБИ-12', 3
+    fruits = [
+        {'name': 'яблоки', 'price': 100},
+        {'name': 'груши', 'price': 120},
+        {'name': 'апельсины', 'price': 80},
+        {'name': 'мандарины', 'price': 95},
+        {'name': 'манго', 'price': 321}
+    ]
+    return render_template('example.html',
+                           name=name, lab=num_of_lab, group=group, 
+                           course=num_of_course, fruits=fruits)
