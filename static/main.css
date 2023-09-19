@@ -36,3 +36,7 @@ footer {
 img {
     padding: 20px 0;
 }
+
+a.active {
+    cursor: pointer;
+}
