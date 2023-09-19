@@ -16,7 +16,7 @@ header {
     color: #e3f9e2;
     padding: 10px;
     font-size: 14pt;
-    margin-bottom: 30px;
+    /* margin-bottom: 10px; */
 }
 
 footer {
@@ -31,4 +31,8 @@ footer {
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+img {
+    padding: 20px 0;
 }

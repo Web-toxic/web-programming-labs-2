@@ -77,7 +77,7 @@ def lab1():
 </html>
 """
 
-@app.route('/lab1/oak')
+@app.route("/lab1/oak")
 def oak():
     return '''
 <!doctype html>
@@ -245,3 +245,7 @@ def example():
 @app.route('/lab2/')
 def lab2():
     return render_template('lab2.html')
+
+@app.route('/lab2/dobermans')
+def dobermans():
+    return render_template('dobermans.html')
