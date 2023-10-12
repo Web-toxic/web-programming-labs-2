@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 3{% endblock %}
+
+{% block main %}
+    {% if name and age and from_where and where and date %}
+
+    <div style="background-color: #fffade; border-radius: 20%; padding: 10px 20px; width: 25%; margin-bottom: 20px;">
+        <h1 style="text-align: center;">Билет</h1>
+
+        <ul>
+            <li>Имя пассажира: {{ name }}</li>
+            <li>Тип билета: {{ 'Детский' if type == 'child' 
+                else 'Взрослый' }}</li>
+            <li>Полка: 
+                {{'нижняя' if shelf == 'bottom' or
+                'верхняя' if shelf == 'top' or
+                'верхняя боковая' if shelf == 'top_side'
+                else 'нижняя боковая'}}</li>
+            <li>{{ 'С багажом' if baggage == 'y'
+                else 'Без багажа' }}</li>
+            <li>Возраст пассажира: {{ age }}</li>
+            <li>Откуда: {{ from_where }}</li>
+            <li>Куда: {{ where }}</li>
+            <li>Дата: {{ date }}</li>
+        </ul>
+    
+        <div style="text-align: center;">
+            <a href="/lab3/ticket">Отменить бронь</a>
+        </div>
+    </div>
+
+    {% else %}
+
+    <h1>Железнодорожный билет</h1>
+
+    <form>
+        <label>ФИО пассажира:</label>
+        <div>
+            <input type="text" name="name" value="{{ name or '' }}">
+            <span class="error">{{ errors.name }}</span>
+        </div>
+
+        <div>Тип билета:</div>
+        <label>
+            <input type="radio" value="adult" name="type" checked and 'selected'>Взрослый
+        </label>
+        <label>
+            <input type="radio" value="child" name="type" and 'selected'>Детский
+        </label>
+
+        <div>
+            <label>Полка:</label>
+            <select name="shelf">
+                <option value="bottom" {{ shelf == 'bottom' and 'selected' }}>Нижняя</option>
+                <option value="top" {{ shelf == 'top' and 'selected' }}>Верхняя</option>
+                <option value="top_side" {{ shelf == 'top_side' and 'selected' }}>Верхняя боковая</option>
+                <option value="bottom_side" {{ shelf == 'bottom_side' and 'selected' }}>Нижняя боковая</option>
+            </select>
+        </div>
+
+        <div>Багаж:</div>
+        <label>
+            <input type="radio" value="y" name="baggage" checked>Да
+        </label>
+        <label>
+            <input type="radio" value="n" name="baggage">Нет
+        </label><br>
+
+        <label>Возраст пассажира:</label>
+        <div>
+            <input type="number" name="age" value="{{ age or '' }}" min="18" max="120">
+            <span class="error">{{ errors.age }}</span>
+        </div>
+
+        <label>Пункт выезда:</label>
+        <div>
+            <input type="text" name="from_where" value="{{ from_where or '' }}">
+            <span class="error">{{ errors.from_where }}</span>
+        </div>
+
+        <label>Пункт назначения:</label>
+        <div>
+            <input type="text" name="where" value="{{ where or '' }}">
+            <span class="error">{{ errors.where }}</span>
+        </div>
+
+        <div>
+            <label>Дата поездки:</label>
+            <input type="date" name="date" value="{{ date or '' }}">
+            <span class="error">{{ errors.date }}</span>
+        </div>
+
+        <div>
+            <button type="submit">Отправить</button>
+        </div>
+    </form>
+
+    {% endif %}
+{% endblock %}
