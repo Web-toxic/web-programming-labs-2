@@ -40,3 +40,9 @@ img {
 a.active {
     cursor: pointer;
 }
+
+.error {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: oblique;
+    color: crimson;
+}
