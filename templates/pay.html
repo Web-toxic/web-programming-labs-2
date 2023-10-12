@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 3{% endblock %}
+
+{% block main %}
+    {% if card and name and cvv %}
+
+    <div>Спасибо, ваш заказ оплачен, ожидайте доставку</div>
+
+    <div>
+        <a href="/lab3/order">Заново</a>
+    </div>
+
+    {% else %}
+
+    <h1>Оплата</h1>
+
+    <div>
+        Сумма к оплате: {{ price }}
+    </div>
+
+    <form>
+        <label>Номер банковской карты:</label>
+        <div>
+            <input type="text" name="card" pattern="\d{16}" value="{{ card or '' }}">
+            <span class="error">{{ errors.card }}</span>
+        </div>
+
+        <label>Имя держателя карты:</label>
+        <div>
+            <input type="text" name="name" value="{{ name or '' }}">
+            <span class="error">{{ errors.name }}</span>
+        </div>
+
+        <label>Номер CVV:</label>
+        <div>
+            <input type="text" name="cvv" size="3" pattern="\d{3}" value="{{ cvv or '' }}">
+            <span class="error">{{ errors.cvv }}</span>
+        </div>
+
+        <div>
+            <button type="submit" >Оплатить</button>
+            <a href="/lab3/order">Отказаться</a>
+        </div>
+    </form>
+    
+    {% endif %}
+{% endblock %}
