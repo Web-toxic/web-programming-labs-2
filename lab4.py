@@ -26,3 +26,27 @@ def login():
     
     return render_template('login.html', errors=errors, username=username, password=password)
  
+
+@lab4.route('/lab4/refrigerator', methods=['GET', 'POST'])
+def refrigerator(): 
+    err = ''
+    if request.method =='GET':
+        return render_template('refrigerator.html', err=err)
+    
+    temperature = request.form.get('temperature')
+
+    if temperature == '':
+        err ='Не задана температура'
+    else:
+        temperature = int(temperature)
+        if temperature < (-12):
+            err ='Не удалось установить температуру — слишком низкое значение'
+        elif temperature > (-1):
+            err = 'Не удалось установить температуру — слишком высокое значение'
+        elif (temperature >= (-12)) and (temperature <= (-9)):
+            err = f'Установлена температура: {temperature}°С ❄️❄️❄️'
+        elif (temperature >= (-8)) and (temperature <= (-5)):
+            err = f'Установлена температура: {temperature}°С ❄️❄️'
+        elif (temperature >= (-4)) and (temperature <= (-1)):
+            err = f'Установлена температура: {temperature}°С ❄️'
+    return render_template('refrigerator.html', temperature=temperature, err=err)
