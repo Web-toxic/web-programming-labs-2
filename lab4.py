@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, make_response
 lab4 = Blueprint('lab4', __name__)
 
 
@@ -94,14 +94,17 @@ def process_order():
     return f"<h3>{message}</h3><br><a href='/lab4/grain_order'>Вернуться к заказу</a>"
 
 
-@lab4.route('/lab4/cookies', methods = ['GET', 'POST'])
+@lab4.route('/lab4/cookies', methods=['GET', 'POST'])
 def cookies():
-    if request.method == 'GET':
-        return render_template('cookies.html' )
-    
+    resp = make_response(render_template('cookies.html'))
+
     color = request.form.get('color')
-    headers = {
-        'Set-Cookie': 'color=' + color + '; path=/',
-        'Location': '/lab4/cookies'
-    }
-    return '', 303, headers
+    b_color = request.form.get('background-color')
+    f_size = request.form.get('font-size')
+    if color and b_color and f_size:
+        resp.set_cookie('color', color)
+        resp.set_cookie('background-color', b_color)
+        resp.set_cookie('font-size', f"{f_size}px")
+    return resp
+
+

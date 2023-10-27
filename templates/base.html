@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Полина Топорнина. {% block lab %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-    {% if request.cookies.get('color') %}
+    {% if request.cookies.get('color') or request.cookies.get('background-color') or request.cookies.get('font-size') %}
     <style>
         body {
-            color: {{ request.cookies.get('color') }};
+            background-color: {{request.cookies.get('background-color')}};
+            font-size: {{request.cookies.get('font-size')}};
+            color: {{request.cookies.get('color')}};
         }
     </style>
     {% endif %}
+
 </head>
 <body>
     <header>
