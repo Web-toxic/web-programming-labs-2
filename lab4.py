@@ -94,3 +94,14 @@ def process_order():
     return f"<h3>{message}</h3><br><a href='/lab4/grain_order'>Вернуться к заказу</a>"
 
 
+@lab4.route('/lab4/cookies', methods = ['GET', 'POST'])
+def cookies():
+    if request.method == 'GET':
+        return render_template('cookies.html' )
+    
+    color = request.form.get('color')
+    headers = {
+        'Set-Cookie': 'color=' + color + '; path=/',
+        'Location': '/lab4/cookies'
+    }
+    return '', 303, headers
