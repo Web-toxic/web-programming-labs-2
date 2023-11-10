@@ -16,7 +16,6 @@ header {
     color: #e3f9e2;
     padding: 10px;
     font-size: 14pt;
-    /* margin-bottom: 10px; */
 }
 
 footer {
@@ -45,4 +44,14 @@ a.active {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-style: oblique;
     color: crimson;
+}
+
+.menu {
+    color: rgb(61, 35, 8);
+    background-color: rgb(255, 234, 212);
+    padding: 10px;
+    font-size: 14pt;
+    border: 3px solid;
+    border-radius: 20px;
+    margin-left: 3%;
 }

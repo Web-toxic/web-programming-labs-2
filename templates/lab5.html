@@ -3,17 +3,39 @@
 {% block lab %}Лабораторная работа 5{% endblock %}
 
 {% block main %}
-    <h1>Flask и БД</h1>
-    <div>Тема лабораторной - Flask и БД. Список сделанных страниц:</div>
-    <ol>
-        <li>
-            <a href="/lab5/users">Список пользователей</a>
-        </li>
-        <li>
-            <a href="/lab4/...">...</a>
-        </li>
-        <li>
-            <a href="/lab4/...">...</a>
-        </li>
-    </ol>
+<menu class="menu" style="display: inline-flex; text-align: justify; width: 100%; border: 0px solid; border-radius: 0%; margin-left: 0%; background-color: #ffffff;">
+    <div class="menu" style="margin-left: 0; border: 0px solid; border-radius: 0%; background-color: #ffffff;">
+        <label style="font-size: 24px;">База Знаний</label>
+    </div>
+    <div class="menu">
+        <a href="/lab5/view_notes">Просмотреть заметки</a>
+    </div>
+    <div class="menu">
+        <a href="/lab5/create_note">Создать заметку</a>
+    </div>
+    <div style="display: flex; float: right; margin-left: 250px;">
+        <div class="menu">
+            <a href="/lab5/login">Войти</a></li>
+        </div>
+        <div class="menu" style="margin-left: 5px;">
+            <a href="/lab5/register" >Зарегистрироваться</a>
+        </div>
+        <div class="menu" style="border: 0px solid; background-color: #ffffff; font-style: italic;">
+            <label>{{ username }}</label>
+        </div>
+    </div>
+</menu>
+<h1>Flask и БД</h1>
+<div>Тема лабораторной - База Данных. Список сделанных страниц:</div>
+<ol>
+    <li>
+        <a href="/lab5/users">Пользователи</a>
+    </li>
+    <!-- <li>
+        <a href="/lab4/...">...</a>
+    </li>
+    <li>
+        <a href="/lab4/...">...</a>
+    </li> -->
+</ol>
 {% endblock %}
