@@ -5,11 +5,6 @@ import psycopg2
 
 lab5 = Blueprint('lab5',__name__)
 
-# app = Flask(__name__)
-# app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-
-# good = 0
-
 def dbConnect():
     conn = psycopg2.connect(
         host="127.0.0.1",
@@ -19,8 +14,6 @@ def dbConnect():
     return conn;
 
 def dbClose(cursor, connection):
-# Закрываем курсор и соединение
-# Порядок важен!
     cursor.close()
     connection.close()
 
@@ -111,10 +104,8 @@ def logPage():
     userID, hashPassword = result
 
     if check_password_hash(hashPassword, password):
-        # print("--------------------", userID, username, "--------------------")
         session['id'] = userID
         session['username'] = username
-        # print("--------------------", session['id'], session['username'], "--------------------")
         dbClose(cur, conn)
         return redirect('/lab5')
     else:
