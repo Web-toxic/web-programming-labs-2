@@ -48,10 +48,11 @@ a.active {
 
 .menu {
     color: rgb(61, 35, 8);
-    background-color: rgb(255, 234, 212);
+    background-color: rgb(255, 248, 240);
     padding: 10px;
     font-size: 14pt;
     border: 3px solid;
     border-radius: 20px;
-    margin-left: 3%;
+    /* margin-left: 1%; */
+    height: 20px;
 }

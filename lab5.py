@@ -1,8 +1,14 @@
+from flask import Flask
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Blueprint, render_template, request, Blueprint, redirect, session
 import psycopg2
 
 lab5 = Blueprint('lab5',__name__)
+
+# app = Flask(__name__)
+# app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+# good = 0
 
 def dbConnect():
     conn = psycopg2.connect(
@@ -86,8 +92,8 @@ def logPage():
     username = request.form.get('username')
     password = request.form.get('password')
     
-    if not (username or password):
-        errors = "Пожалуйтса, заполните все поля"
+    if (username == '' or password == ''):
+        errors = "Пожалуйста, заполните все поля"
         return render_template("login5lab.html", errors=errors)
     
     conn = dbConnect()
@@ -105,10 +111,90 @@ def logPage():
     userID, hashPassword = result
 
     if check_password_hash(hashPassword, password):
+        # print("--------------------", userID, username, "--------------------")
         session['id'] = userID
         session['username'] = username
+        # print("--------------------", session['id'], session['username'], "--------------------")
         dbClose(cur, conn)
         return redirect('/lab5')
     else:
         errors = "Неправильный логин или пароль"
         return render_template("login5lab.html", errors=errors)
+
+
+@lab5.route('/lab5/new_article', methods = ['GET', 'POST'])
+def creatArticle():
+    visibleUser = session.get('username')
+    errors = ""
+
+    userID = session.get('id')
+
+    if userID is not None:
+        if request.method == 'GET':
+            return render_template('new_article.html', username=visibleUser)
+        
+        if request.method == 'POST':
+            text_article = request.form.get('text_article')
+            title = request.form.get('title_article')
+
+            if len(text_article) == 0:
+                errors = "Заполните текст"
+                return render_template('new_article.html', errors=errors, username=visibleUser)
+            
+            conn = dbConnect()
+            cur = conn.cursor() 
+
+            cur.execute(f"INSERT INTO articles(user_id, title, article_text) VALUES ({userID}, '{title}', '{text_article}') RETURNING id")
+            new_article_id = cur.fetchone()[0]
+            conn.commit()
+            dbClose(cur, conn)
+            return redirect(f'/lab5/articles/{new_article_id}')
+
+    return redirect('/lab5/login')
+
+
+@lab5.route('/lab5/articles/<int:article_id>')
+def getArticle(article_id):
+    userID = session.get('id')
+
+    if userID is not None:
+        conn = dbConnect()
+        cur = conn.cursor()     
+
+        cur.execute(f"SELECT title, article_text FROM articles WHERE id = %s and user_id = %s", (article_id, userID))
+
+        articleBody = cur.fetchone()
+
+        dbClose(cur, conn)
+
+        if articleBody is None:
+            return "Not found"
+        
+        text = articleBody[1].splitlines()
+
+        return render_template('articleN.html', article_text = text, article_title=articleBody[0], username = session.get('username'))
+    
+
+@lab5.route('/lab5/user/articles', methods = ['GET', 'POST'])
+def user_articles():
+    userID = session.get('id')
+    title = request.form.get('title_article')
+
+    if userID is not None:
+        conn = dbConnect()
+        cur = conn.cursor()     
+
+        cur.execute(f"SELECT title, id FROM articles WHERE user_id = {userID}")
+
+        articleBody = cur.fetchall()
+
+        if articleBody is None:
+            return "Not found"
+
+        return render_template('user_articles.html', username = session.get('username'), article_title=articleBody)
+    
+
+@lab5.route('/lab5/logout', methods=['GET'])
+def logout():
+    session.clear()
+    return 'You have been logged out'

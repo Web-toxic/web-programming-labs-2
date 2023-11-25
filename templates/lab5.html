@@ -3,15 +3,16 @@
 {% block lab %}Лабораторная работа 5{% endblock %}
 
 {% block main %}
-<menu class="menu" style="display: inline-flex; text-align: justify; width: 100%; border: 0px solid; border-radius: 0%; margin-left: 0%; background-color: #ffffff;">
-    <div class="menu" style="margin-left: 0; border: 0px solid; border-radius: 0%; background-color: #ffffff;">
-        <label style="font-size: 24px;">База Знаний</label>
+<menu class="menu" style="display: inline-flex; text-align: justify; width: 100%; border: 0px solid; border-radius: 0%; margin-left: 0%; background-color: rgb(237, 217, 193);">
+    <div class="menu" style="margin-left: 0; border: 0px solid; border-radius: 0%; background-color: rgb(237, 217, 193);">
+        <label style="font-size: 24px; font-weight: bolder; font-style: italic;">База Знаний</label>
     </div>
+    
+    <button role="button" class="menu" style="height: 45px;">
+        <a href="/lab5/user/articles">Просмотреть заметки</a>
+    </button>
     <div class="menu">
-        <a href="/lab5/view_notes">Просмотреть заметки</a>
-    </div>
-    <div class="menu">
-        <a href="/lab5/create_note">Создать заметку</a>
+        <a href="/lab5/new_article">Создать заметку</a>
     </div>
     <div style="display: flex; float: right; margin-left: 250px;">
         <div class="menu">
@@ -23,6 +24,7 @@
         <div class="menu" style="border: 0px solid; background-color: #ffffff; font-style: italic;">
             <label>{{ username }}</label>
         </div>
+        <a href="/lab5/logout"><img src="/static/logout.png" style="margin: 0px 20px; height: 20px"></a>
     </div>
 </menu>
 <h1>Flask и БД</h1>
@@ -31,11 +33,5 @@
     <li>
         <a href="/lab5/users">Пользователи</a>
     </li>
-    <!-- <li>
-        <a href="/lab4/...">...</a>
-    </li>
-    <li>
-        <a href="/lab4/...">...</a>
-    </li> -->
 </ol>
 {% endblock %}
