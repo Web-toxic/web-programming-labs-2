@@ -4,9 +4,11 @@ from lab2 import lab2
 from lab3 import lab3
 from lab4 import lab4
 from lab5 import lab5
-from zzz import zzz
-from flask_sqlalchemy import SQLAlchemy
 from lab6 import lab6
+from zzz import zzz
+
+from flask_sqlalchemy import SQLAlchemy
+
 from Db import db
 from Db.models import users
 from flask_login import LoginManager
@@ -17,6 +19,7 @@ app.register_blueprint(lab2)
 app.register_blueprint(lab3)
 app.register_blueprint(lab4)
 app.register_blueprint(lab5)
+app.register_blueprint(lab6)
 
 app.register_blueprint(zzz)
 
@@ -28,11 +31,16 @@ database_name = "knowledge_base_orm"
 password = "7414"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{user_db}:{password}@{host_ip}:{host_port}/{database_name}'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
-app.register_blueprint(lab6)
+login_manager = LoginManager()
+
+login_manager.login_view = "lab6.login"
+login_manager.init_app(app)
 
 
-
+@login_manager.user_loader
+def load_user(user_id):
+    return users.query.get(int(user_id))
