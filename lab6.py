@@ -7,7 +7,7 @@ from Db import db
 
 from Db.models import users, articles
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import login_user, login_required, current_user
+from flask_login import login_user, login_required, current_user, logout_user
 
 lab6 = Blueprint('lab6',__name__)
 
@@ -93,7 +93,74 @@ def login():
 
 @lab6.route("/lab6/articles")
 @login_required
-def articles_list():
+def  l_articles():
     my_articles = articles.query.filter_by(user_id=int(current_user.id)).all()
     print(my_articles[0])
-    return render_template("list_articles.html", articles_list=my_articles)
+    return render_template("list_articles.html", articles=my_articles)
+
+
+@lab6.route("/lab6/new_article_6", methods=['GET', 'POST'])
+@login_required
+def createArticle():
+    errors = ""
+    userID = session.get('id')
+
+    if request.method=='GET':
+        return render_template('new_article_6.html')
+    else:
+        userID = current_user.id
+        text_article = request.form.get("text_article")
+        title = request.form.get("title")
+
+        if len(text_article) == 0:
+            errors = "Заполните текст"
+            return render_template('new_article_6.html', errors=errors)
+        else:
+            is_public = request.form.get('is_publish')
+            if is_public == 'False':
+                is_public = None
+            else:
+                is_public = True
+            new_article = articles(user_id = userID, title = title, article_text=text_article, is_public=is_public)
+
+    db.session.add(new_article)
+    db.session.commit()
+
+    return redirect(f"/lab6/list_articles")
+
+
+@lab6.route("/lab6/list_articles")
+@login_required
+def listArticles():
+    username = users.query.filter_by(id=current_user.id).first().username
+    list_articles = articles.query.filter_by(user_id=current_user.id).all()
+
+    return render_template("list_articles.html", username=username,  list_articles= list_articles)
+
+
+@lab6.route("/lab6/articles/<int:article_id>")
+@login_required
+def getArticle(article_id):
+    username = users.query.filter_by(id=current_user.id).first().username
+    title = articles.query.filter_by(id=article_id).first().title
+    text = articles.query.filter_by(id=article_id).first().article_text
+    return render_template("articleN_6.html", title=title, article_text=text, username=username)
+
+
+@lab6.route("/lab6/article_publish_list", methods = ['GET', 'POST'])
+@login_required
+def published():
+    username = users.query.filter_by(id=current_user.id).first().username
+    if articles.query.filter_by(is_public=True).all() is None:
+        list = 'Нет опубликованных статей'
+        return render_template("publish_article_6.html", article_published_list=list, username = username)
+    else:
+        list = articles.query.filter_by(is_public=True).all()
+        return render_template("publish_article_6.html", article_published_list=list, username = username)
+    
+
+@lab6.route("/lab6/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect("/lab6/login")

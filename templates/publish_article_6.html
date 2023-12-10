@@ -30,14 +30,23 @@
         <a href="/lab6/logout"><img src="/static/logout.png" style="margin: 0px 20px; height: 20px"></a>
     </div>
 </menu>
-<body>
-    <h1>Добро пожаловать, {{ username }}!</h1>
-            
-    <h2>Ваши заметки:</h2>
+<span class="error">{{ errors }}</span>
+
+<h1>Список опубликованных статей пользователей</h1>
+<div>
     <ul>
-        {% for article in list_articles %}
-            <li style="border: 1px solid; padding: 5px; width: 500px; margin-top: 15px; border-radius: 8px; text-align: center;"><a href="/lab6/articles/{{ article.id }}">{{ article.title }}</a></li>
+        {% for article in article_published_list %}
+        <li>
+            <a href="/lab6/articles/{{ article.id }}"><h2 style="margin-top: 24px; margin-bottom: 0px;">{{  article.article_title }}</h2></a>
+            <br>Статья(ID): {{ article.id }},
+            <br>Автор(ID): {{ article.user_id }}
+            <br>
+        </li>
         {% endfor %}
     </ul>
-</body>
+</div>
+
+<p>
+    <a href="/lab6/">Назад</a>
+</p>
 {% endblock %}

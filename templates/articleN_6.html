@@ -30,14 +30,31 @@
         <a href="/lab6/logout"><img src="/static/logout.png" style="margin: 0px 20px; height: 20px"></a>
     </div>
 </menu>
+<span class="error">{{ errors }}</span>
+<div>
+    <h1>Новая заметка</h1>
+    <form method="post">
+        <input type="text" name="title_article" placeholder="Название статьи" style="height: 30px; width: 300px;">
+        <p>
+            <textarea name="text_article" placeholder="Текст статьи" style="width: 80%; height: 400px; padding: 10px;"></textarea>
+        </p>
+    <input type="submit" value="Apply"/>
+    </form> 
+</div>
+
+
 <body>
-    <h1>Добро пожаловать, {{ username }}!</h1>
-            
-    <h2>Ваши заметки:</h2>
-    <ul>
-        {% for article in list_articles %}
-            <li style="border: 1px solid; padding: 5px; width: 500px; margin-top: 15px; border-radius: 8px; text-align: center;"><a href="/lab6/articles/{{ article.id }}">{{ article.title }}</a></li>
-        {% endfor %}
-    </ul>
+    <div style="margin-left: 200px; margin-right: 200px;">
+        <h1>{{ article_title }}</h1>
+
+
+        {{ article_text }}
+
+
+    </div>
 </body>
+
+<p>
+    <a href="/lab6/">Назад</a>
+</p>
 {% endblock %}

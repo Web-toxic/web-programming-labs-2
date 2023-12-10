@@ -5,14 +5,17 @@
 {% block main %}
 <menu class="menu" style="display: inline-flex; text-align: justify; width: 100%; border: 0px solid; border-radius: 0%; margin-left: 0%; background-color: rgb(237, 217, 193);">
     <div class="menu" style="margin-left: 0; border: 0px solid; border-radius: 0%; background-color: rgb(237, 217, 193);">
-        <label style="font-size: 24px; font-weight: bolder; font-style: italic;">База Знаний</label>
+        <!-- <label style="font-size: 24px; font-weight: bolder; font-style: italic;">База Знаний</label> -->
     </div>
     
-    <button role="button" class="menu" style="height: 45px;">
-        <a href="">Просмотреть заметки</a>
+    <button role="button" class="menu" style="height: 67px;">
+        <a href="/lab6/list_articles" >Просмотреть заметки</a>
     </button>
-    <div class="menu">
-        <a href="">Создать заметку</a>
+    <div class="menu" style="height: 45px;">
+        <a href="/lab6/article_publish_list">Опубликованные статьи</a>
+    </div>
+    <div class="menu" style="height: 45px;">
+        <a href="/lab6/new_article_6">Создать заметку</a>
     </div>
     <div style="display: flex; float: right; margin-left: 250px;">
         <div class="menu">
@@ -27,6 +30,7 @@
         <a href="/lab6/logout"><img src="/static/logout.png" style="margin: 0px 20px; height: 20px"></a>
     </div>
 </menu>
+
 <body>
     <h1>БД</h1>
     <div>Проверки</div>
