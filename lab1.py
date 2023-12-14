@@ -26,25 +26,22 @@ def menu():
 
             <ul>
                 <li>
-                    <a href="http://127.0.0.1:5000/lab1" target="_blank">Лабораторная работа 1</a>
+                    <a href="/lab1" target="_blank">Лабораторная работа 1</a>
                 </li>
                 <li>
-                    <a href="http://127.0.0.1:5000/lab2" target="_blank">Лабораторная работа 2</a>
+                    <a href="/lab2" target="_blank">Лабораторная работа 2</a>
                 </li>
                 <li>
-                    <a href="http://127.0.0.1:5000/lab3" target="_blank">Лабораторная работа 3</a>
+                    <a href="/lab3" target="_blank">Лабораторная работа 3</a>
                 </li>
                 <li>
-                    <a href="http://127.0.0.1:5000/lab4" target="_blank">Лабораторная работа 4</a>
+                    <a href="/lab4" target="_blank">Лабораторная работа 4</a>
                 </li>
                 <li>
-                    <a href="http://127.0.0.1:5000/lab5" target="_blank">Лабораторная работа 5</a>
+                    <a href="/lab5" target="_blank">Лабораторная работа 5</a>
                 </li>
                 <li>
-                    <a href="http://127.0.0.1:5000/lab6" target="_blank">Лабораторная работа 6</a>
-                </li>
-                <li>
-                    <a href="http://127.0.0.1:5000/zzz" target="_blank">Защита</a>
+                    <a href="/lab6" target="_blank">Лабораторная работа 6</a>
                 </li>
             </ul>
         </main>
