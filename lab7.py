@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, jsonify, render_template, request, abort
 
 lab7 = Blueprint('lab7',__name__)
 
@@ -16,12 +16,12 @@ def drink():
 def api():
     data = request.json
 
-    if data['method']=='get_price':
+    if data['method']=='get-price':
         return get_price(data['params'])
     if data['method']=='pay':
         return pay(data['params'])
-    if data['method'] =='refund':
-        return refund(data['params'])
+    # if data['method'] =='refund':
+    #     return refund(data['params'])
 
     abort(400)
 
