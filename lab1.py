@@ -46,6 +46,9 @@ def menu():
                 <li>
                     <a href="/lab7" target="_blank">Лабораторная работа 7</a>
                 </li>
+                <li>
+                    <a href="/RGZ" target="_blank">Расчётно-графическое задание</a>
+                </li>
             </ul>
         </main>
 

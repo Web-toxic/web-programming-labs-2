@@ -6,6 +6,7 @@ from lab4 import lab4
 from lab5 import lab5
 from lab6 import lab6
 from lab7 import lab7
+from RGZ import RGZ
 
 from flask_sqlalchemy import SQLAlchemy
 
@@ -21,6 +22,7 @@ app.register_blueprint(lab4)
 app.register_blueprint(lab5)
 app.register_blueprint(lab6)
 app.register_blueprint(lab7)
+app.register_blueprint(RGZ)
 
 app.secret_key = "7414"
 user_db = "polina_knowledge_base_orm"
