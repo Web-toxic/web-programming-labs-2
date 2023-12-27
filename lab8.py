@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, render_template, request, abort, jsonify
-
+import datetime
 lab8 = Blueprint('lab8',__name__)
 
 @lab8.route('/lab8/')
@@ -56,6 +56,6 @@ def put_courses(course_num):
 def add_course():
     course = request.get_json()
     courses.append(course)
-    # course["date_"] = datetime.datetime.now().strftime('%Y-%m-%d')
+    course["date_"] = datetime.datetime.now().strftime('%Y-%m-%d')
     return {"num": len(courses)-1}
 
