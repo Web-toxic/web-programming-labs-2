@@ -17,7 +17,7 @@ courses = [
 #Весь список курсов
 @lab8.route('/lab8/api/courses/', methods=['GET'])
 def get_courses2():
-    return jsonify (courses)
+    return jsonify(courses)
 
 
 #Конкретный курс по номеру
