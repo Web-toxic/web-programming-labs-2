@@ -57,3 +57,43 @@ function deleteCourse(num){
     });
 }
 
+function showModal(){
+    document.querySelector('div.modal').style.display='block';
+}
+
+function hideModal(){
+    document.querySelector('div.modal').style.display='none';
+}
+
+function cancel(){
+    hideModal();
+}
+
+function addCourse(){
+    document.getElementById('num').value='';
+    document.getElementById('name').value='';
+    document.getElementById('videos').value='';
+    document.getElementById('price').value='';
+    showModal();
+}
+
+function sendCourse(){
+    const num=document.getElementById('num').value;
+    const course={
+        name:document.getElementById('name').value,
+        videos:document.getElementById('videos').value,
+        price:document.getElementById('price').value
+    }
+    const url=`/lab8/api/courses/${num}`;
+    const method=num ? 'put':'post';
+    fetch(url,{
+        method:method,
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(course)
+    })
+    .then(function(){
+        fillCourselist();
+        hideModal;
+    });
+}
+
