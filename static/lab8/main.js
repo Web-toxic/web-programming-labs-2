@@ -48,3 +48,12 @@ function fillCourselist(){
     })
 }
 
+function deleteCourse(num){
+    if (!confirm ('Вы точно хотите удалить курс?'))
+        return;
+    fetch(`/lab8/api/courses/${num}`, {method:'delete'})
+    .then(function(){
+        fillCourselist();
+    });
+}
+
