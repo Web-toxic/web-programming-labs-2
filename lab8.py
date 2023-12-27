@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, render_template, request, abort
+from flask import Blueprint, jsonify, render_template, request, abort, jsonify
 
 lab8 = Blueprint('lab8',__name__)
 
@@ -49,3 +49,13 @@ def put_courses(course_num):
         return courses[course_num]
     else:
         abort(404, "Course not found")
+
+
+#Добавление нового курса
+@lab8.route('/lab8/api/courses/', methods=['POST'])
+def add_course():
+    course = request.get_json()
+    courses.append(course)
+    # course["date_"] = datetime.datetime.now().strftime('%Y-%m-%d')
+    return {"num": len(courses)-1}
+
