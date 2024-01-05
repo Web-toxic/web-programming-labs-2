@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, render_template, request, abort, jsonify
+from flask import Blueprint, jsonify, render_template, request, abort
 import datetime
 lab8 = Blueprint('lab8',__name__)
 
